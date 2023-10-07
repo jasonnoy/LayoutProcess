@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 def process_coyo_ocr(file_path, output_path):
     ocr_processor = CoyoOcrProcessor()
-    with open(file_path, 'r') as f, open(output_path, 'r', encoding='utf-8') as f2:
+    with open(file_path, 'r') as f, open(output_path, 'w', encoding='utf-8') as f2:
         for line in tqdm(f):
             data = json.loads(line)
             ocr_data = data['paddle_ocr']

@@ -85,7 +85,7 @@ class LayoutProcessor:
             for b_j in range(b_i + 1, len(boxes)):
                 if len(boxes[b_j]) == 0:
                     continue
-                dist = self.poly_distance(boxes[b_i], boxes[b_j])
+                dist = self.poly_distance(boxes[b_i][0], boxes[b_j][0])
                 if dist < threshold:
                     boxes[b_i] = self.combine_boxes(boxes[b_i], boxes[b_j])
                     boxes[b_j] = []

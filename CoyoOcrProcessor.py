@@ -78,10 +78,10 @@ class CoyoOcrProcessor(LayoutProcessor):
             x2_br, y2_br = box2[2]
             x1_bl, y1_bl = box1[3]
             x2_bl, y2_bl = box2[3]
-            x1 = np.mean(x1_tl, x1_tr, x1_br, x1_bl)
-            y1 = np.mean(y1_tl, y1_tr, y1_br, y1_bl)
-            x2 = np.mean(x2_tl, x2_tr, x2_br, x2_bl)
-            y2 = np.mean(y2_tl, y2_tr, y2_br, y2_bl)
+            x1 = np.mean([x1_tl, x1_tr, x1_br, x1_bl])
+            y1 = np.mean([y1_tl, y1_tr, y1_br, y1_bl])
+            x2 = np.mean([x2_tl, x2_tr, x2_br, x2_bl])
+            y2 = np.mean([y2_tl, y2_tr, y2_br, y2_bl])
             return euclidean_distance(x1, y1, x2, y2)
         else:
             raise ValueError("Unknown polygon distance metric: {}".format(self.dist_metric))

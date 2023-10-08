@@ -69,10 +69,11 @@ class LayoutProcessor:
             for b_j in range(b_i + 1, len(boxes)):
                 if boxes[b_j] in res:
                     continue
-                dist = self.poly_distance(boxes[b_i], boxes[b_j])
+                dist = self.poly_distance(boxes[b_i][0], boxes[b_j][0])
                 if min_dist is None or dist < min_dist[0]:
                     min_dist = (dist, b_j)
-            res.append(boxes[min_dist[1]])
+            if min_dist is not None:
+                res.append(boxes[min_dist[1]])
         return res
 
     def emerge_boxes(self, boxes, threshold=30):
@@ -93,7 +94,7 @@ class LayoutProcessor:
 
     def process(self, boxes):
         if self.strategy == "reorder":
-            return self.emerge_boxes(boxes)
+            return self.reorder_boxes(boxes)
         elif self.strategy == "emerge":
             return self.emerge_boxes(boxes)
         else:
